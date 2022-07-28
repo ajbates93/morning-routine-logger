@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+import { reactive } from 'vue'
 import { Entry } from '../types'
 
 export type RootState = {
@@ -36,4 +37,8 @@ export const useStore = defineStore({
       return this.entries.findIndex((entry) => entry.id === id)
     }
   }
+})
+
+export const authStore = reactive({
+  user: {}
 })

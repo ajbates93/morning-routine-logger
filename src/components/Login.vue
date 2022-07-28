@@ -2,8 +2,8 @@
   import { ref } from 'vue';
   import { supabase } from '../supabase'
   
-  const loading = ref<Boolean>(false)
-  const email = ref<string | undefined>('')
+  const loading = ref(false)
+  const email = ref('')
 
   const handleLogin = async () => {
     try {

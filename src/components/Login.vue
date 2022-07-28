@@ -1,7 +1,9 @@
 <script setup lang="ts">
   import { ref } from 'vue';
   import { supabase } from '../supabase'
+  import { useStore } from '../store';
   
+  const store = useStore()
   const loading = ref(false)
   const email = ref('')
 
@@ -21,7 +23,7 @@
 </script>
 
 <template>
-  <form row flex="~ center" @submit.prevent="handleLogin">
+  <form v-if="!store.user" row flex="~ center" @submit.prevent="handleLogin">
     <div>
       <h1>Morning Routine Logger</h1>
       <p>Sign in via magic link with your email below</p>

@@ -1,14 +1,23 @@
+import { User } from '@supabase/gotrue-js'
 import { defineStore } from 'pinia'
 import { reactive } from 'vue'
 import { Entry } from '../types'
 
 export type RootState = {
-  entries: Entry[]
+  entries: Entry[],
+  // TODO: fix type error bug
+  // this should be 
+  // user: User
+  // but I can't get round the type error
+  user: any
 }
 
 export const useStore = defineStore({
   id: 'mainStore',
-  state: () => ({ entries: [] } as RootState),
+  state: () => ({ 
+    entries: [],
+    user: {}
+  } as RootState),
   actions: {
     createNewEntry(entry: Entry) {
       if (!entry)
@@ -37,8 +46,4 @@ export const useStore = defineStore({
       return this.entries.findIndex((entry) => entry.id === id)
     }
   }
-})
-
-export const authStore = reactive({
-  user: {}
 })

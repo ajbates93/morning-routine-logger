@@ -4,5 +4,8 @@
 <template>
   <div>
     <AppHeader />
+    <main>
+      <router-view></router-view>
+    </main>
   </div>
 </template>

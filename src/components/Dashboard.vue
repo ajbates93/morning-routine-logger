@@ -37,8 +37,9 @@
 
 <script setup lang="ts">
   import { reactive } from 'vue';
-import { useStore } from '../store';
+  import { useStore } from '../store';
   import { Entry } from '../types'
+  import { uuid } from 'vue3-uuid'
 
   const input = reactive({ 
     category: '', 
@@ -52,7 +53,7 @@ import { useStore } from '../store';
 
   const createNewEntry = () => {
     const e: Entry = {
-      id: 'nvuirenaoiueer2904832',
+      id: uuid.v4(),
       category: input.category,
       duration: input.duration,
       distance: input.distance,

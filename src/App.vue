@@ -2,5 +2,7 @@
 </script>
 
 <template>
-  
+  <div>
+    <AppHeader />
+  </div>
 </template>

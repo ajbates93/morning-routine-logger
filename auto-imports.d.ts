@@ -4,9 +4,11 @@ declare global {
   const EffectScope: typeof import('vue')['EffectScope']
   const computed: typeof import('vue')['computed']
   const createApp: typeof import('vue')['createApp']
+  const createNewEntry: typeof import('./src/composables/index')['createNewEntry']
   const customRef: typeof import('vue')['customRef']
   const defineAsyncComponent: typeof import('vue')['defineAsyncComponent']
   const defineComponent: typeof import('vue')['defineComponent']
+  const deleteEntry: typeof import('./src/composables/index')['deleteEntry']
   const effectScope: typeof import('vue')['effectScope']
   const getCurrentInstance: typeof import('vue')['getCurrentInstance']
   const getCurrentScope: typeof import('vue')['getCurrentScope']
@@ -44,6 +46,7 @@ declare global {
   const toRefs: typeof import('vue')['toRefs']
   const triggerRef: typeof import('vue')['triggerRef']
   const unref: typeof import('vue')['unref']
+  const updateEntry: typeof import('./src/composables/index')['updateEntry']
   const useAttrs: typeof import('vue')['useAttrs']
   const useCssModule: typeof import('vue')['useCssModule']
   const useCssVars: typeof import('vue')['useCssVars']
@@ -60,9 +63,11 @@ declare module '@vue/runtime-core' {
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
     readonly createApp: UnwrapRef<typeof import('vue')['createApp']>
+    readonly createNewEntry: UnwrapRef<typeof import('./src/composables/index')['createNewEntry']>
     readonly customRef: UnwrapRef<typeof import('vue')['customRef']>
     readonly defineAsyncComponent: UnwrapRef<typeof import('vue')['defineAsyncComponent']>
     readonly defineComponent: UnwrapRef<typeof import('vue')['defineComponent']>
+    readonly deleteEntry: UnwrapRef<typeof import('./src/composables/index')['deleteEntry']>
     readonly effectScope: UnwrapRef<typeof import('vue')['effectScope']>
     readonly getCurrentInstance: UnwrapRef<typeof import('vue')['getCurrentInstance']>
     readonly getCurrentScope: UnwrapRef<typeof import('vue')['getCurrentScope']>
@@ -100,6 +105,7 @@ declare module '@vue/runtime-core' {
     readonly toRefs: UnwrapRef<typeof import('vue')['toRefs']>
     readonly triggerRef: UnwrapRef<typeof import('vue')['triggerRef']>
     readonly unref: UnwrapRef<typeof import('vue')['unref']>
+    readonly updateEntry: UnwrapRef<typeof import('./src/composables/index')['updateEntry']>
     readonly useAttrs: UnwrapRef<typeof import('vue')['useAttrs']>
     readonly useCssModule: UnwrapRef<typeof import('vue')['useCssModule']>
     readonly useCssVars: UnwrapRef<typeof import('vue')['useCssVars']>

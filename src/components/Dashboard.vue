@@ -1,29 +1,13 @@
 <template>
-  <div p5>
-    <h1 text-xl mb-5>Dashboard</h1>
-    <div>
-      <h3 text-lg mb-3 font-bold>New Entry</h3>
-      <form @submit.prevent bg-gray-200 p3>
-        <select v-model="input.category" placeholder="Category">
-          <option value="Run">Run</option>
-          <option value="Walk">Walk</option>
-          <option value="Cycle">Cycle</option>
-          <option value="Exercise Class">Exercise Class</option>
-          <option value="Yoga">Yoga</option>
-        </select>
-        <input v-model="input.duration" type="text" placeholder="Duration" />
-        <input v-model="input.distance" type="text" placeholder="Distance" />
-        <input v-model="input.description" type="text" placeholder="Description" />
-        <button @click="create">Add</button>
-      </form>
-      <div my5 v-if="store.entries.length">
-        <h3 text-lg mb-3 font-bold>Previous Entries</h3>
-        <EntryRow v-for="(entry, idx) in store.entries" :key="idx"
-          @update="update" @remove="remove" :entry="entry" />
-      </div>
-      <div v-else>
-        No entries entered yet... Add an entry above!
-      </div>
+  <div py10 px5 text-center>
+    <NewEntry @create="newEntry => create(newEntry)" />
+    <div max-w-200 mx-auto text-center my5 v-if="store.entries.length">
+      <h3 text-3xl my-5>Previous Entries</h3>
+      <EntryRow v-for="(entry, idx) in store.entries" :key="idx"
+        @update="update" @remove="remove" :entry="entry" />
+    </div>
+    <div v-else>
+      No entries entered yet... Add an entry above!
     </div>
   </div>
 </template>
@@ -31,11 +15,12 @@
 <script setup lang="ts">
   import { onMounted, reactive, ref } from 'vue';
   import { useStore } from '../store';
-  import { Entry } from '../types'
+  import { Entry, NewEntry as INewEntry } from '../types'
   import { uuid } from 'vue3-uuid'
   import { supabase } from '../supabase';
   import { createNewEntry, deleteEntry, updateEntry } from '../composables'
   import EntryRow from '../components/EntryRow.vue'
+  import NewEntry from './NewEntry.vue';
 
   const input = reactive({ 
     category: '', 
@@ -76,17 +61,17 @@
     }
   } 
 
-  const create = () => {
+  const create = (newEntry: INewEntry) => {
     const now = new Date()
     const e: Entry = {
       id: uuid.v4(),
       user_id: store.user.id,
       created_at: now,
       updated_at: now,
-      category: input.category,
-      duration: input.duration,
-      distance: input.distance,
-      description: input.description,
+      category: newEntry.category,
+      duration: newEntry.duration,
+      distance: newEntry.distance,
+      description: newEntry.description,
       link: ''
     }
     createNewEntry(e)

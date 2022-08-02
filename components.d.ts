@@ -14,6 +14,7 @@ declare module '@vue/runtime-core' {
     Entry: typeof import('./src/components/Entry.vue')['default']
     EntryRow: typeof import('./src/components/EntryRow.vue')['default']
     Login: typeof import('./src/components/Login.vue')['default']
+    NewEntry: typeof import('./src/components/NewEntry.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }

@@ -11,4 +11,11 @@ export interface Entry {
   link: string
 }
 
+export interface NewEntry {
+  category: string,
+  duration: number,
+  distance: string | number,
+  description: string
+}
+
 // type Category = 'Run' | 'Walk' | 'Cycle' | 'Exercise Class' | 'Yoga'

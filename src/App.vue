@@ -11,7 +11,7 @@
 </script>
 
 <template>
-  <div>
+  <div bg-lightblue-900 text-gray-200 font-sans font-thin>
     <AppHeader />
     <main>
       <router-view></router-view>

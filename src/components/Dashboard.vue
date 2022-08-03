@@ -1,7 +1,7 @@
 <template>
-  <div py10 px5 text-center>
+  <div py10 px5 max-w-200 mx-auto text-center>
     <NewEntry @create="newEntry => create(newEntry)" />
-    <div max-w-200 mx-auto text-center my5 v-if="store.entries.length">
+    <div text-center my5 v-if="store.entries.length">
       <h3 text-3xl my-5>Previous Entries</h3>
       <EntryRow v-for="(entry, idx) in store.entries" :key="idx"
         @update="update" @remove="remove" :entry="entry" />
@@ -18,7 +18,6 @@
   import { Entry, NewEntry as INewEntry } from '../types'
   import { uuid } from 'vue3-uuid'
   import { supabase } from '../supabase';
-  import { createNewEntry, deleteEntry, updateEntry } from '../composables'
   import EntryRow from '../components/EntryRow.vue'
   import NewEntry from './NewEntry.vue';
 
@@ -46,6 +45,7 @@
       let { data, error } = await supabase
         .from('entries')
         .select()
+        .order('created_at', { ascending: false })
         // .eq('user_id', store.user.id)
 
       if (error) throw error
@@ -74,14 +74,12 @@
       description: newEntry.description,
       link: ''
     }
-    createNewEntry(e)
-    getEntries()
+    store.createNewEntry(e)
     reset()
   }
   
   const remove = (id: string) => {
-    deleteEntry(id)
-    getEntries()
+    store.deleteEntry(id)
   }
 
   const update = (id: string, payload: Entry) => {
@@ -97,8 +95,7 @@
       description: payload.description,
       link: ''
     }
-    updateEntry(id, payload)
-    getEntries()
+    store.updateEntry(id, payload)
   }
 
   onMounted(() => {

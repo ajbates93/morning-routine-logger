@@ -48,13 +48,13 @@
 
 <template>
   <div mb-3 pb-3 text-center justify-center flex>
-    <form v-if="edit" @submit.prevent text-lg font-normal text-white flex w-full p5 items-center justify-left bg-gray:10>
+    <form v-if="edit" @submit.prevent text-lg font-normal text-white flex w-full p5 items-center justify-left bg-gray:10 rounded-l>
       <div :class="iconString" mr10 text-8xl></div>
       <div text-left>
         <div text-3xl mb2>{{new Date(entry.created_at).toLocaleDateString()}}</div>
         <div text-gray-800>
           <div>
-            <span w-25 inline-block underline text-white>Category:</span>
+            <span w-25 inline-block text-white>Category:</span>
             <select v-model="newEntry.category" placeholder="Category">
               <option value="Run">Run</option>
               <option value="Walk">Walk</option>
@@ -64,27 +64,27 @@
             </select>
           </div>
           <div mb1>
-            <span w-25 inline-block underline text-white>Duration:</span><input v-model="newEntry.duration" type="text" placeholder="Duration" />
+            <span w-25 inline-block text-white>Duration:</span><input v-model="newEntry.duration" type="text" placeholder="Duration" />
           </div>
           <div mb1>
-            <span w-25 inline-block underline text-white>Distance:</span><input v-model="newEntry.distance" type="text" placeholder="Distance" />
+            <span w-25 inline-block text-white>Distance:</span><input v-model="newEntry.distance" type="text" placeholder="Distance" />
           </div>
           <div mb1>
-            <span w-25 inline-block underline text-white>Description:</span><input v-model="newEntry.description" type="text" placeholder="Description" />
+            <span w-25 inline-block text-white>Description:</span><input v-model="newEntry.description" type="text" placeholder="Description" />
           </div>
         </div>
       </div>
     </form>
-    <div v-else text-lg font-normal text-white flex w-full p5 items-center justify-left bg-gray:10>
+    <div v-else text-lg font-normal text-white flex w-full p5 items-center justify-left bg-gray:10 rounded-l>
       <div :class="iconString" mr10 text-8xl></div>
       <div text-left>
         <div text-3xl mb2>{{new Date(entry.created_at).toLocaleDateString()}}</div>
         <div v-if="entry.updated_at !== entry.created_at">
-          <span w-25 inline-block underline>Modified:</span> <span>{{entry.updated_at}}</span>
+          <span w-25 inline-block>Modified:</span> <span>{{entry.updated_at}}</span>
         </div>
-        <div><span w-25 inline-block underline>Duration:</span> {{entry.duration}}</div>
-        <div><span w-25 inline-block underline>Distance:</span> {{entry.distance}}</div>
-        <div><span w-25 inline-block underline>Description:</span>: {{entry.description}}</div>
+        <div><span w-25 inline-block>Duration:</span> {{entry.duration}}</div>
+        <div><span w-25 inline-block>Distance:</span> {{entry.distance}}</div>
+        <div><span w-25 inline-block>Description:</span>: {{entry.description}}</div>
       </div>
     </div>
     <button v-if="edit" @click="update" bg-success hover:bg-success-hover items-center flex p="y1 x3" inline-block text-white>

@@ -1,7 +1,11 @@
 <template>
   <div py10 px5 max-w-200 mx-auto text-center>
     <NewEntry @create="newEntry => create(newEntry)" />
-    <div text-center my5 v-if="store.entries.length">
+    <div v-if="loading" text-center text-white text-2xl>
+      <span class="rotate" text-center i-carbon-circle-dash text-5xl  m="y3 x-auto" block></span>
+      Loading...
+    </div>
+    <div text-center my5 v-else-if="store.entries.length">
       <h3 text-3xl my-5>Previous Entries</h3>
       <EntryRow v-for="(entry, idx) in store.entries" :key="idx"
         @update="update" @remove="remove" :entry="entry" />
@@ -104,5 +108,22 @@
 </script>
 
 <style scoped>
+.rotate {
+  -webkit-animation:spin 3s linear infinite;
+  -moz-animation:spin 3s linear infinite;
+  animation:spin 3s linear infinite;
+}
+@-moz-keyframes spin { 
+    100% { -moz-transform: rotate(360deg); } 
+}
+@-webkit-keyframes spin { 
+    100% { -webkit-transform: rotate(360deg); } 
+}
+@keyframes spin { 
+    100% { 
+        -webkit-transform: rotate(360deg); 
+        transform:rotate(360deg); 
+    } 
+}
 
 </style>

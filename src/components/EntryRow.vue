@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { reactive, ref } from 'vue';
+  import { computed, reactive, ref } from 'vue';
   import { Entry, NewEntry } from '../types';
 
   const { entry } = defineProps<{
@@ -28,28 +28,30 @@
     newEntry.description = entry.description
     edit.value = false
   }
-  const iconString = ref('')
-  const getIconString = () => {
+  // computeds
+  const getIconString = computed(() => {
     if (entry.category === 'Run')
-      iconString.value = 'i-iconoir-running'
+      return 'i-iconoir-running'
     if (entry.category === 'Walk')
-      iconString.value = 'i-iconoir-walking'
+      return 'i-iconoir-walking'
     if (entry.category === 'Cycle')
-      iconString.value = 'i-iconoir-cycling'
+      return 'i-iconoir-cycling'
     if (entry.category === 'Exercise Class')
-      iconString.value = 'i-iconoir-gym'
+      return 'i-iconoir-gym'
     if (entry.category === 'Yoga')
-      iconString.value = 'i-iconoir-yoga'
-  }
-  onMounted(() => {
-    getIconString()
+      return 'i-iconoir-yoga'
+  })
+  const isNewEntry = computed(() => {
+    const today = new Date().toLocaleDateString()
+    const entryDate = new Date(entry.created_at).toLocaleDateString()
+    return entryDate == today
   })
 </script>
 
 <template>
   <div mb-3 pb-3 text-center justify-center flex>
     <form v-if="edit" @submit.prevent text-lg font-normal text-white flex w-full p5 items-center justify-left bg-gray:10 rounded-l>
-      <div :class="iconString" mr10 text-8xl></div>
+      <div :class="getIconString" mr10 text-8xl></div>
       <div text-left>
         <div text-3xl mb2>{{new Date(entry.created_at).toLocaleDateString()}}</div>
         <div text-gray-800>
@@ -76,15 +78,16 @@
       </div>
     </form>
     <div v-else text-lg font-normal text-white flex w-full p5 items-center justify-left bg-gray:10 rounded-l>
-      <div :class="iconString" mr10 text-8xl></div>
+      <div :class="getIconString" mr10 text-8xl></div>
       <div text-left>
+        <div v-if="isNewEntry" bg-success px2 inline-flex items-center rounded mb-3><span inline-block mr-2 i-carbon-star-filled></span> New entry! Great work!</div>
         <div text-3xl mb2>{{new Date(entry.created_at).toLocaleDateString()}}</div>
         <div v-if="entry.updated_at !== entry.created_at">
-          <span w-25 inline-block>Modified:</span> <span>{{entry.updated_at}}</span>
+          <span w-25 inline-block>Modified:</span><span>{{new Date(entry.updated_at).toLocaleDateString()}}</span>
         </div>
-        <div><span w-25 inline-block>Duration:</span> {{entry.duration}}</div>
-        <div><span w-25 inline-block>Distance:</span> {{entry.distance}}</div>
-        <div><span w-25 inline-block>Description:</span>: {{entry.description}}</div>
+        <div><span w-25 inline-block>Duration:</span>{{entry.duration}} minutes</div>
+        <div v-if="entry.distance"><span w-25 inline-block>Distance:</span>{{entry.distance}}</div>
+        <div><span w-25 inline-block>Description:</span>{{entry.description}}</div>
       </div>
     </div>
     <button v-if="edit" @click="update" bg-success hover:bg-success-hover items-center flex p="y1 x3" inline-block text-white>

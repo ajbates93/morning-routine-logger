@@ -1,5 +1,5 @@
 <template>
-  <div py10 px5 max-w-200 mx-auto text-center>
+  <div py10 px5 max-w-200 mx-auto text-center v-if="store.user">
     <NewEntry @create="newEntry => create(newEntry)" />
     <div v-if="loading" text-center text-white text-2xl>
       <span class="rotate" text-center i-carbon-circle-dash text-5xl  m="y3 x-auto" block></span>
@@ -13,6 +13,10 @@
     <div v-else>
       No entries entered yet... Add an entry above!
     </div>
+  </div>
+  <div py10 px5 max-w-200 mx-auto text-center v-else>
+    <p text-xl mb5>To track your morning routines, you must first log in to your account.</p>
+    <router-link to="/login" text-xl bg-success hover:bg-success-hover items-center inline-flex p="y1 x3" inline-block text-white>Log In</router-link>
   </div>
 </template>
 

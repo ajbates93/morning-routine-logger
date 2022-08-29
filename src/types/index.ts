@@ -3,8 +3,8 @@ export interface Entry {
   user_id: string,
   created_at: Date,
   updated_at: Date,
-  // category: Category,
-  category: string,
+  category: Category,
+  // category: string,
   duration: number,
   description: string,
   distance: number | string,
@@ -18,4 +18,4 @@ export interface NewEntry {
   description: string
 }
 
-// type Category = 'Run' | 'Walk' | 'Cycle' | 'Exercise Class' | 'Yoga'
+type Category = 'Run' | 'Walk' | 'Cycle' | 'Exercise Class' | 'Yoga'

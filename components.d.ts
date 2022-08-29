@@ -11,7 +11,6 @@ declare module '@vue/runtime-core' {
     AppFooter: typeof import('./src/components/AppFooter.vue')['default']
     AppHeader: typeof import('./src/components/AppHeader.vue')['default']
     Dashboard: typeof import('./src/components/Dashboard.vue')['default']
-    Entry: typeof import('./src/components/Entry.vue')['default']
     EntryRow: typeof import('./src/components/EntryRow.vue')['default']
     Login: typeof import('./src/components/Login.vue')['default']
     NewEntry: typeof import('./src/components/NewEntry.vue')['default']
